@@ -1,0 +1,12 @@
+/**************home*****************/
+.showSide{
+    width:100%;
+}
+.hideSide {
+    width: 0;
+}
+#side {
+    background-color: #343A40;
+}
+/**************home*****************/
+
