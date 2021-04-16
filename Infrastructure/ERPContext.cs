@@ -5,6 +5,7 @@ using System.Text;
 using Core;
 using Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure
 {
@@ -20,6 +21,9 @@ namespace Infrastructure
             
             base.OnModelCreating(modelBuilder);
         }
+
+       
+
         public DbSet<Car> Cars { get; set; }
     }
 }

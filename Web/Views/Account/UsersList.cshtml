@@ -1,0 +1,128 @@
+﻿@model IEnumerable<IdentityUser>
+@{
+    ViewBag.Title = "Users List";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+                <h3 class="content-header-title mb-0 d-inline-block">Users List</h3>
+                <div class="row breadcrumbs-top d-inline-block">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Users List
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-header-right col-md-6 col-12">
+                <div class="btn-group float-md-right">
+                    <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                    <div class="dropdown-menu arrow">
+                        <a class="dropdown-item" href="#"><i class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="all-transactions">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Users List</h4>
+                            </div>
+                            <div class="card-content mt-1">
+                                <div class="table-responsive">
+                                    <table id="crypto-transaction" class="table table-hover table-xl trans-wrapper">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-top-0">ID</th>
+                                                <th class="border-top-0">Full Name</th>
+                                                <th class="border-top-0">User Name</th>
+                                                <th class="border-top-0">Phone</th>
+                                                <th class="border-top-0">Email</th>
+                                                <th class="border-top-0"></th>
+                                            
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var user in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <div class="Trans-id">@user.Id</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="Trans-id">@user.NormalizedUserName</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="amount">
+                                                            @user.UserName
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="price">@user.PhoneNumber</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="usd">@user.Email</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="fee"><i class="la la-unlock"><a asp-controller="Account" asp-action="RestPassword" asp-route-Id="@user.Id">rest</a></i></div>
+                                                    </td>
+                                                 
+                                                 
+                                                </tr>
+                                            }
+                                          
+
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination justify-content-end m-2">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">« Prev</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">Next »</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
