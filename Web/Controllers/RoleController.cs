@@ -41,37 +41,56 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRole(RolesViewModel roleModel)
         {
-            IdentityRole identityRole = new IdentityRole
+            if (ModelState.IsValid)
             {
-                Name = roleModel.roleName
-            };
-            var result = await _roleManager.CreateAsync(identityRole);
-            if (result.Succeeded)
-            {
-                return RedirectToAction(nameof(RoleController.RolesList), "Role");
-            }
-            foreach (IdentityError error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
+                var role = await _roleManager.FindByNameAsync(roleModel.roleName);
+                if (role == null)
+                {
+                    IdentityRole identityRole = new IdentityRole
+                    {
+                        Name = roleModel.roleName
+                    };
+                    var result = await _roleManager.CreateAsync(identityRole);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(nameof(RoleController.RolesList), "Role");
+                    }
 
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+
+                }
+            }
             return View();
         }
 
-        
-        // POST: RoleController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpGet]
+        public  ActionResult RoleDelete()
         {
-            try
+            return View();
+        }
+            [HttpPost]
+        public async Task<ActionResult> RoleDelete(string roleName)
+        {
+            if (!string.IsNullOrEmpty(roleName))
             {
-                return RedirectToAction(nameof(Index));
+                var role = await _roleManager.FindByNameAsync(roleName);
+
+                if (role == null)
+                {
+                    IdentityRole identityRole = new IdentityRole
+                    {
+                        Name = roleName
+                    };
+                    await _roleManager.DeleteAsync(identityRole);
+                    return RedirectToAction(nameof(RoleController.RolesList), "Role");
+                }
+
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
     }
 }

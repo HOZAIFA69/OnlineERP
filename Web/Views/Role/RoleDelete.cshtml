@@ -1,8 +1,7 @@
-﻿@model RolesViewModel
+﻿@model IdentityRole
 @{
-    ViewBag.Title = "Create Roles";
+    ViewBag.Title = "Delete Roles";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
-
 }
 
 
@@ -11,29 +10,29 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                <h3 class="content-header-title mb-0 d-inline-block">Account Managment</h3>
+                <h3 class="content-header-title mb-0 d-inline-block"> Account Management</h3>
                 <div class="row breadcrumbs-top d-inline-block">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
+                          
                             <li class="breadcrumb-item">
-                                <a asp-action="RolesList" asp-controller="Role">Role Managment</a>
+                                <a href="#"></a>
                             </li>
-                            
                             <li class="breadcrumb-item active">
-                                Create Role
+                               Delete Role
                             </li>
                         </ol>
                     </div>
                 </div>
             </div>
             <div class="content-header-right col-md-6 col-12">
-                @*<div class="btn-group float-md-right">
-                        <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                        <div class="dropdown-menu arrow">
-                            <a class="dropdown-item" href="#"><i class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
-                        </div>
-                    </div>*@
+                <div class="btn-group float-md-right">
+                    <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                    <div class="dropdown-menu arrow">
+                        <a class="dropdown-item" href="#"><i class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -41,7 +40,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title" id="basic-layout-form-center">Create Role</h4>
+                        <h4 class="card-title" id="basic-layout-form-center"> Rest Password</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
@@ -56,36 +55,34 @@
                         <div class="card-body">
 
 
-                            <form class="form" asp-controller="Role" asp-action="CreateRole" method="post">
+                            <form class="form" asp-controller="Role" asp-action="RoleDelete" method="post">
                                 <div class="row justify-content-md-center">
                                     <div class="col-md-6">
                                         <div class="form-body">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                          
+
+
+
+
                                             <div class="form-group">
-                                                <label asp-for="roleName"></label>
-                                                <input id="eventInput1" class="form-control" placeholder="Role name" asp-for="roleName">
+                                                <label for="eventInput5" asp-for="Name"> </label>
+                                                <input type="text" id="eventInput5" class="form-control" placeholder="Role name .." asp-for="Name">
                                             </div>
-   
-
-
 
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-actions text-center">
-
                                     <button type="submit" class="btn btn-primary">
                                         <i class="la la-check-square-o"></i> Save
                                     </button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

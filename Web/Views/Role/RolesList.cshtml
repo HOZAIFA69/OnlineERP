@@ -1,12 +1,121 @@
 ﻿@model IEnumerable<IdentityRole>
 @{
     ViewBag.Title = "Roles List";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-@foreach (var item in Model)
-{
-    <div class="">
-        @item.Name
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+                <h3 class="content-header-title mb-0 d-inline-block">Role management</h3>
+                <div class="row breadcrumbs-top d-inline-block">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+
+                            <li class="breadcrumb-item active">
+                                Roles liss
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-header-right col-md-6 col-12">
+                <div class="btn-group float-md-right">
+                    <a class="btn btn-info mb-1" asp-action="CreateRole" asp-controller="Role">Create Role <i class="la la-plus-square"></i></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="all-transactions">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Roles List</h4>
+                            </div>
+                            <div class="card-content mt-1">
+                                <div class="table-responsive">
+                                    <table id="crypto-transaction" class="table table-hover table-xl trans-wrapper">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-top-0">ID</th>
+                                                <th class="border-top-0"> Name</th>
+                                                <th class="border-top-0">Normal Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var role in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <div class="Trans-id">@role.Id</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="Trans-id">@role.Name</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="Trans-id">@role.NormalizedName</div>
+                                                    </td>
+
+
+
+                                                    <td>
+                                                        <div class=" text-danger">
+                                                            <form asp-action="RoleDelete" asp-controller="Role"  method="post">
+
+                                                                <button type="submit" class="btn btn-danger" asp-route-roleName="@role.Name">
+                                                                    <i class="la la-trash"></i>
+                                                                </button>
+
+                                                            </form>
+                                                        </div>
+                                                    </td>
+
+
+                                                </tr>
+                                            }
+
+
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+
+                                        @*<nav aria-label="Page navigation">
+                                                <ul class="pagination justify-content-end m-2">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                            <span aria-hidden="true">« Prev</span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Next">
+                                                            <span aria-hidden="true">Next »</span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-}
-
+</div>

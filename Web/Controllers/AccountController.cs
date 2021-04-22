@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Infrastructure.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AccountController : Controller
     {
         private readonly IUnitOfWork<IdentityUser> _unitOfWork;
@@ -33,9 +35,17 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UsersList()
+        public async Task<IActionResult> UsersList(string returnUrl)
         {
-            return View(await _userManager.Users.ToListAsync());
+            var users = await _userManager.Users.ToListAsync();
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return View(users);
+            }
+            else
+            {
+                return View(users);
+            }
         }
 
 
@@ -47,6 +57,7 @@ namespace Web.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel newUser)
         {
             var roles = new SelectList(_unitOfRoles.Entity.GetAll(), "Name", "Name");
@@ -77,14 +88,16 @@ namespace Web.Controllers
             return View(newUser);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -96,13 +109,19 @@ namespace Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.userName, model.password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Unauthorized();
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
+                    }
                 }
-
-
             }
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -110,6 +129,7 @@ namespace Web.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(AccountController.Login), "Account");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> RestPassword(string Id)
@@ -158,7 +178,7 @@ namespace Web.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

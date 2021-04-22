@@ -262,13 +262,13 @@
                         </li>
                         <li class="dropdown dropdown-user nav-item">
                             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                @if (!_signInManager.IsSignedIn(User))
+                                @if (_signInManager.IsSignedIn(User))
                                 {
-                                    return;
+                                    <span class="mr-1 user-name text-      bold-700">@User.Identity.Name</span>
                                 }
                                 else
                                 {
-                                    <span class="mr-1 user-name text-      bold-700">@User.Identity.Name</span>
+                                    return;
                                 }
 
                                 <span class="avatar avatar-online"><img src="~/Dashboard/app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span>
@@ -276,7 +276,10 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i class="ft-clipboard"></i> Todo</a><a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="ft-power"></i> Logout</a>
+                                <form asp-controller="Account" asp-action="Logout" method="post" >
+                                    <button type="submit" class="dropdown-item btn btn-danger" >Logout <i class="ft-power"></i></button>
+                                
+                                    </form>
                             </div>
                         </li>
                     </ul>
@@ -314,6 +317,27 @@
                 <li class=" navigation-header">
                     <span data-i18n="User Interface">User Interface</span><i class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right" data-original-title="User Interface"></i>
                 </li>
+                @* start of account managment*@
+                @if (_signInManager.IsSignedIn(User)&& User.IsInRole("admin"))
+                {
+                    <li class=" nav-item">
+                        <a href="#"><i class="la la-unlock"></i><span class="menu-title" data-i18n="Authentication">Accounts Managment</span></a>
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" asp-action="UsersList" asp-controller="Account" ><i></i><span>Users list</span></a>
+                            </li>
+                            <li>
+                                <a class="menu-item" asp-action="Register" asp-controller="Account"><i></i><span>Register new User</span></a>
+                            </li>
+                            <li>
+                                <a class="menu-item" asp-action="RolesList" asp-controller="Role"><i></i><span>Manage Roles</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+
+
                 <li class=" nav-item">
                     <a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="Components">Components</span></a>
                     <ul class="menu-content">
