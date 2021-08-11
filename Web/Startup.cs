@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.ViewModels;
+using Web.CustomHtmlHelper;
 
 namespace Web
 {
@@ -55,6 +56,7 @@ namespace Web
             });
 
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+           
 
         }
 

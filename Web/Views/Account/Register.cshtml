@@ -90,6 +90,7 @@
                                                 @Html.DropDownList("Role", (IEnumerable<SelectListItem>)ViewBag.roles, new { @class = "form-control" })
                                                 <span asp-validation-for="Role" class="text-danger"></span>
 
+                                                @Html.zDropdownlist((IEnumerable<SelectListItem>)ViewBag.roles)
                                             </div>
 
 

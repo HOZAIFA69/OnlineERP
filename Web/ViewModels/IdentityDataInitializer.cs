@@ -22,7 +22,7 @@ namespace Web.ViewModels
             if (userManager.FindByNameAsync("hozaifa").Result == null)
 
             {
-                var user = new IdentityUser { UserName = "hozaifa", Email = "hozaifa69@yahoo.com", NormalizedEmail = "Hozaifa Mohammed", PhoneNumber = "0914939992" };
+                var user = new IdentityUser { UserName = "Hozaifa", Email = "hozaifa69@yahoo.com", NormalizedEmail = "Hozaifa Mohammed", PhoneNumber = "0914939992" };
                 var result = userManager.CreateAsync(user, "Hozaifa@12345").Result;
                 if (result.Succeeded)
                 {
